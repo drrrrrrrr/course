@@ -18,11 +18,11 @@
     <style type="text/css">
 
         .margin_left_60 {
-            margin-left: 60px !important;
+            margin-left: 30px !important;
         }
 
         .margin_bottom_60 {
-            margin-bottom: 40px !important;
+            margin-bottom: 30px !important;
         }
 
         input.valide {
@@ -40,7 +40,7 @@
         }
 
         #wrapper {
-            margin-top: 20px;
+            margin-top: 100px;
         }
 
         .row {
@@ -48,7 +48,7 @@
         }
 
         .site-header nav {
-            padding: 22px 30px;
+            padding: 22px 30px ;
         }
 
             .site-header nav > a {
@@ -63,12 +63,16 @@
                 margin-top: -2px;
                 vertical-align: middle;
             }
+            /*/*.margin_top{
+                margin-top:100px;
+            }*/*/
     </style>
 </head>
 <body>
     <header class="site-header">
     </header>
     <div id="wrapper" class="container" ng-app="Sudoku">
+  
         <div class="content" ng-controller="SudokuController">
             <div class="row">
                 <div class="col-md-11 col-sm-11 col-xs-11">
@@ -83,6 +87,7 @@
                         </div>
                     </div>
                 </div>
+           
                 <div class="col-md-1 col-sm-1 col-xs-1">
                     <div class="row">
                         <button class="btn btn-default btn-block" ng-click="init()">
@@ -105,8 +110,8 @@
             </div>
             <hr>
             <div class="row">
-                <div class="col-md-11 col-sm-11 col-xs-11 col-md-offset-1 col-sd-offset-1 col-xs-offset-1">
-                    <button disabled="disabled" type="button" class="btn btn-default" ng-repeat="possibility in currentPossibilities">
+                <div class="col-md-5 col-sm-5 col-xs-5 col-md-offset-4 col-sd-offset-4 col-xs-offset-4">
+                    <button disabled="disabled" type="button" class="btn btn-success" ng-repeat="possibility in currentPossibilities">
                         {[{possibility}]}
                     </button>
                 </div>

@@ -70,6 +70,10 @@ namespace courseWORK.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
+        public string UserInfo(string login)
+        {
+            return login;
+        }
 
     }
 }
