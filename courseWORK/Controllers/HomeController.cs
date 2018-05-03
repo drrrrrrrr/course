@@ -19,19 +19,27 @@ namespace courseWORK.Controllers
 
             return View();
         }
-
+        [Authorize(Roles ="user")]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
             return View();
         }
-        [HttpGet]
+      
         public JsonResult As()
         {
             string k = "as";
             return Json(k, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult Bs()
+        {
+            string k = "as";
+            return Json(k, JsonRequestBehavior.AllowGet);
+        }
+
+
+
         public string Andex()
         {
             string result = "Вы не авторизованы";

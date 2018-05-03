@@ -1,5 +1,6 @@
-Sudoku.controller('SudokuController', function SudokuController($scope, $http, data) 
+Sudoku.controller('SudokuController', function SudokuController($scope, data, $http) 
 {
+
 	'use strict';
 
 	$scope.rows = angular.copy(data);	
@@ -375,13 +376,10 @@ Sudoku.controller('SudokuController', function SudokuController($scope, $http, d
 		}		
 		return randList;
     }
-    $scope.check = function () {
-      
-            $http.get('/home/as/')
-                .then(function (response) {
-                    $scope.myWelcome = response.data;
-                });
-     ;
+    $scope.checks = function () {
+        $http.get("/Home/Bs").success(function (response) {
+            $scope.fg = response.data;
+        });
     }
     /**
      * Generates a new grid.

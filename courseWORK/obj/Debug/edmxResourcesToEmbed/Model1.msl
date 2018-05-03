@@ -1,6 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="Хранилище SudokuDBModelContainer" CdmEntityContainer="SudokuDBEntities">
+  <EntityContainerMapping StorageEntityContainer="Хранилище SudokuDBModelContainer" CdmEntityContainer="SudokuDBEntities1">
+    <EntitySetMapping Name="Role">
+      <EntityTypeMapping TypeName="SudokuDBModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="State">
       <EntityTypeMapping TypeName="SudokuDBModel.State">
         <MappingFragment StoreEntitySet="State">
@@ -16,6 +24,8 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="StateId" ColumnName="StateId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

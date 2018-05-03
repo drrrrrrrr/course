@@ -10,8 +10,11 @@ namespace courseWORK.Controllers
 {
     public class AccountController : Controller
     {
-   
-
+        SudokuDBEntities1 db = new SudokuDBEntities1();
+        public ActionResult Login()
+        {
+            return View();
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model)
@@ -19,12 +22,8 @@ namespace courseWORK.Controllers
             if (ModelState.IsValid)
             {
                 // поиск пользователя в бд
-                User user = null;
-                using (SudokuDBEntities db = new SudokuDBEntities())
-                {
-                    user = db.User.FirstOrDefault(u => u.Email == model.Name && u.Password == model.Password);
+                User user = db.User.FirstOrDefault(u => u.Email == model.Name && u.Password == model.Password);
 
-                }
                 if (user != null)
                 {
                     FormsAuthentication.SetAuthCookie(model.Name, true);
@@ -35,15 +34,10 @@ namespace courseWORK.Controllers
                     ModelState.AddModelError("", "Пользователя с таким логином и паролем нет");
                 }
             }
-
             return View(model);
         }
 
         public ActionResult Register()
-        {
-            return View();
-        }
-        public ActionResult Login()
         {
             return View();
         }
@@ -53,22 +47,13 @@ namespace courseWORK.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = null;
-                using (SudokuDBEntities db = new SudokuDBEntities())
-                {
-                    user = db.User.FirstOrDefault(u => u.Email == model.Name);
-                }
+                User user = db.User.FirstOrDefault(u => u.Email == model.Name && u.Password == model.Password);
+
                 if (user == null)
                 {
-                    // создаем нового пользователя
-                    using (SudokuDBEntities db = new SudokuDBEntities())
-                    {
-                        db.User.Add(new User { Email = model.Name, Password = model.Password });
-                        db.SaveChanges();
-
-                        user = db.User.Where(u => u.Email == model.Name && u.Password == model.Password).FirstOrDefault();
-                    }
-                    // если пользователь удачно добавлен в бд
+                    db.User.Add(new User { Email = model.Name, Password = model.Password, RoleId = 2 ,StateId=1});
+                    db.SaveChanges();
+                    user = db.User.Where(u => u.Email == model.Name && u.Password == model.Password).FirstOrDefault();
                     if (user != null)
                     {
                         FormsAuthentication.SetAuthCookie(model.Name, true);
@@ -76,11 +61,8 @@ namespace courseWORK.Controllers
                     }
                 }
                 else
-                {
                     ModelState.AddModelError("", "Пользователь с таким логином уже существует");
-                }
             }
-
             return View(model);
         }
         public ActionResult Logoff()
@@ -88,5 +70,6 @@ namespace courseWORK.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
+
     }
 }

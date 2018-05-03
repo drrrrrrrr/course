@@ -4,9 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1f933458d62848d2adb55a3b68bae86f" Name="Diagram1">
-        <EntityTypeShape EntityType="SudokuDBModel.State" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SudokuDBModel.User" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="860a0f626aa94cdf943a305893fd37ed" Name="Diagram1">
+        <EntityTypeShape EntityType="SudokuDBModel.Role" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SudokuDBModel.State" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SudokuDBModel.User" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="SudokuDBModel.FK_User_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="SudokuDBModel.FK_User_State" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
