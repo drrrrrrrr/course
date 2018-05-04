@@ -28,7 +28,7 @@
                     <li>@Html.ActionLink("Регистрация", "Register", "Account")</li>
                     @if (User.Identity.IsAuthenticated)
     {
-                <li>@Html.ActionLink("Ваш логин: " + User.Identity.Name, @"userinfo", "Account",new { login = User.Identity.Name },null)</li>
+                <li>@Html.ActionLink("Ваш логин: " + User.Identity.Name, @"userinfo", "Account",new { login = User.Identity.Name },null     )</li>
 }
 else
 {

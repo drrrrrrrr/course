@@ -70,9 +70,16 @@ namespace courseWORK.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
-        public string UserInfo(string login)
+        public ActionResult UserInfo(string login)
         {
-            return login;
+            using (SudokuDBEntities1 db = new SudokuDBEntities1())
+            {
+                User k = db.User.Where(x => x.Email == login).FirstOrDefault();
+                State m = db.User.Where(x => x.Email == login).FirstOrDefault().State;
+                ViewBag.CountGame = m.GameCount;
+                ViewBag.Point = m.Point;
+                return View(k);
+            }
         }
 
     }

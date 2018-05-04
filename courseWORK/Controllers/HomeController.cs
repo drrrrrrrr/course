@@ -27,15 +27,29 @@ namespace courseWORK.Controllers
             return View();
         }
       
-        public JsonResult As()
+        public string AddStatLose(string login)
         {
-            string k = "as";
-            return Json(k, JsonRequestBehavior.AllowGet);
+            using (SudokuDBEntities1 db = new SudokuDBEntities1())
+            {
+                User k = db.User.Where(x => x.Email == login).FirstOrDefault();
+                State state = k.State;
+                state.GameCount++;
+                db.SaveChanges();
+            }
+            return "ok";
         }
-        public JsonResult Bs()
+        public string AddStatWin(string login)
         {
-            string k = "as";
-            return Json(k, JsonRequestBehavior.AllowGet);
+
+            using (SudokuDBEntities1 db = new SudokuDBEntities1())
+            {
+                User k = db.User.Where(x => x.Email == login).FirstOrDefault();
+                State state = k.State;
+                state.Point++;
+                state.GameCount++;
+                db.SaveChanges();
+            }
+            return "ok";
         }
 
 
@@ -48,6 +62,17 @@ namespace courseWORK.Controllers
                 result = "Ваш логин: " + User.Identity.Name;
             }
             return result;
+        }
+        public JsonResult GetLogin()
+        {
+
+            string result = "ya";
+            if (User.Identity.IsAuthenticated)
+            {
+                result = User.Identity.Name;
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

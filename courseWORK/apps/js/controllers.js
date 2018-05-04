@@ -286,9 +286,11 @@ Sudoku.controller('SudokuController', function SudokuController($scope, data, $h
      *      4. backtrack algorithm (does not try the possibilities one by one,
      *                              instead randomly choose possibilities).
      */
-	function solveRows(rows){
+    function solveRows(rows)
+    {
     	var state = true;
-		while(state){
+        while (state)
+        {
 			state = false;
 
             // try to fill unique values, otherwise return false if not solvable
@@ -376,11 +378,45 @@ Sudoku.controller('SudokuController', function SudokuController($scope, data, $h
 		}		
 		return randList;
     }
-    $scope.checks = function () {
-        $http.get("/Home/Bs").success(function (response) {
-            $scope.fg = response.data;
+    var GetLogin = function () {
+        var answer;
+        $http.get("/Home/GetLogin").success(function (response) {
+            answer = response
+                ;
+            $scope.login = response;
+            console.log($scope.login);
+
         });
+        return answer;
     }
+    $scope.login = GetLogin();
+    $scope.checks = function () {
+        GetLogin();
+        if (isSolved($scope.rows)) {
+            if (!ch()) {
+                console.log($scope.login);
+                $http.get("/Home/AddStatLose?login=" + $scope.login).success(function (response) {
+                    alert("ВЫ проиграли");
+                    $scope.rows = createEmptyRows();
+                });
+            }
+            else {
+                console.log($scope.login);
+                $http.get("/Home/AddStatWin?login=" + $scope.login).success(function (response) {
+                    alert("win");
+                    $scope.rows = createEmptyRows();
+                });
+            }
+        }
+        else {
+            console.log($scope.login);
+            $http.get("/Home/AddStatLose?login=" + $scope.login).success(function (response) {
+                alert("lose");
+                $scope.rows = createEmptyRows();
+            });
+        }
+    };
+
     /**
      * Generates a new grid.
      */
@@ -434,6 +470,8 @@ Sudoku.controller('SudokuController', function SudokuController($scope, data, $h
 		$scope.rows = angular.copy(rows);
 	};
 
+
+
 	$scope.check = function(rowId, columnId) {
 		rowId = rowId - 1;
 		columnId = columnId - 1;
@@ -475,7 +513,8 @@ Sudoku.controller('SudokuController', function SudokuController($scope, data, $h
             }	    	   		
    	};
    	   	   
-	$scope.possibilities = function(row_id, column_id) {
+    $scope.possibilities = function (row_id, column_id)
+    {
 		row_id = row_id - 1;
 		column_id = column_id - 1;
 		var pos = getPossibilities($scope.rows, row_id, column_id);
@@ -485,11 +524,20 @@ Sudoku.controller('SudokuController', function SudokuController($scope, data, $h
 	
 	$scope.solve = function() {
 		var results = solveRows($scope.rows);
-		if(results['state']){
-			$scope.rows = jQuery.extend(true, [], results['rows']);
-			alert("solved");			
-		}
-		else
-			alert("can't be solved")
-	};
+        if (results['state']) {
+            $scope.rows = jQuery.extend(true, [], results['rows']);
+            alert("solved");
+        }
+        else
+            alert("we lose");
+    };
+    var ch =  function () {
+        var results = solveRows($scope.rows);
+        if (results['state']) {
+            $scope.rows = jQuery.extend(true, [], results['rows']);
+            return true;
+        }
+        else
+            return false;
+    };
 }); 
