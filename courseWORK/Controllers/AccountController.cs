@@ -11,6 +11,7 @@ namespace courseWORK.Controllers
     public class AccountController : Controller
     {
         SudokuDBEntities1 db = new SudokuDBEntities1();
+        
         public ActionResult Login()
         {
             return View();
