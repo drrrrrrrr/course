@@ -83,9 +83,8 @@ namespace courseWORK.Controllers
             {
                 User k = db.User.Where(x => x.Email == login).FirstOrDefault();
                 State m = db.User.Where(x => x.Email == login).FirstOrDefault().State;
-                ViewBag.CountGame = m.GameCount;
-                ViewBag.Point = m.Point;
-                return View(k);
+                UserState us = new UserState(k.Email, m.GameCount.ToString(), m.Point.ToString());
+                return View(us);
             }
         }
 

@@ -19,7 +19,7 @@ namespace courseWORK.Models
         {
             get
             {
-                if(GameCount==null)
+                if(GameCount==null || GameCount=="0")
                 {
                     return "0";
                 }

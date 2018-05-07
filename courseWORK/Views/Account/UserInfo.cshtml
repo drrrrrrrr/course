@@ -1,4 +1,4 @@
-﻿@model courseWORK.User
+﻿@model courseWORK.Models.UserState
 
 @{
     ViewBag.Title = "UserInfo";
@@ -7,7 +7,7 @@
 <h2>UserInfo</h2>
 
 <div>
-    <h4>User</h4>
+    <h4>UserState</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,38 +19,32 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Password)
+            @Html.DisplayNameFor(model => model.GameCount)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Password)
+            @Html.DisplayFor(model => model.GameCount)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.RoleId)
+            @Html.DisplayNameFor(model => model.Point)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.RoleId)
+            @Html.DisplayFor(model => model.Point)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.StateId)
+            @Html.DisplayNameFor(model => model.CountWin)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.StateId)
-        </dd>
-        <dd>
-            <p>Количество игр @ViewBag.CountGame</p> 
-        </dd>
-        <dd>
-            <p>Количество очков @ViewBag.Point</p>
+            @Html.DisplayFor(model => model.CountWin)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
