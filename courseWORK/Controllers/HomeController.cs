@@ -1,4 +1,5 @@
-﻿using System;
+﻿using courseWORK.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -52,9 +53,6 @@ namespace courseWORK.Controllers
             }
             return "ok";
         }
-
-
-
         public string Andex()
         {
             string result = "Вы не авторизованы";
@@ -75,5 +73,22 @@ namespace courseWORK.Controllers
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult Top()
+        {
+            List<UserState> states = new List<UserState>();
+            using (SudokuDBEntities1 bd = new SudokuDBEntities1())
+            {
+                 List<User> users = bd.User.ToList();
+                for (int i = 0; i < users.Count; i++)
+                {
+                    State st = users[i].State;
+                    UserState us = new UserState(users[i].Email, st.GameCount.ToString(), st.Point.ToString());
+                    states.Add(us);
+                }
+                states.Sort();
+            }
+
+            return View(states);
+         }
+        }
     }
-}

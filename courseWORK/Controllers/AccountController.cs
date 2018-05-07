@@ -52,7 +52,13 @@ namespace courseWORK.Controllers
 
                 if (user == null)
                 {
-                    db.User.Add(new User { Email = model.Name, Password = model.Password, RoleId = 2 ,StateId=1});
+                    User regUser = new User { Email = model.Name, Password = model.Password, RoleId = 2};
+                    State st = new State();
+                    st.Id = db.State.Count();
+                    st.Point = 0;
+                    st.GameCount = 0;
+                    db.State.Add(st);
+                    db.User.Add(new User { Email = model.Name, Password = model.Password, RoleId = 2 ,StateId=st.Id});
                     db.SaveChanges();
                     user = db.User.Where(u => u.Email == model.Name && u.Password == model.Password).FirstOrDefault();
                     if (user != null)
